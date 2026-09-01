@@ -5,6 +5,8 @@
   "description": "An early-2000s conspiracy website documenting anomalies in Belfast. Pure HTML/CSS/JS, deployable to GitHub Pages.",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "update:worldwide": "node scripts/update-worldwide.js",
+    "test:worldwide": "node --test scripts/update-worldwide.test.js"
   }
 }
