@@ -124,6 +124,31 @@ function getYouTubeVideoId(url) {
   return match ? match[1] : '';
 }
 
+function getThumbnailUrl(item) {
+  if (item.thumbnail) {
+    return item.thumbnail;
+  }
+
+  const videoId = getYouTubeVideoId(item.url);
+  if (videoId) {
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  }
+
+  if (item.platform === 'tiktok') {
+    return 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80';
+  }
+
+  if (item.platform === 'facebook') {
+    return 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80';
+  }
+
+  if (item.platform === 'blog') {
+    return 'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1200&q=80';
+  }
+
+  return 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80';
+}
+
 function parseDuckDuckGoResults(html) {
   const resultLinks = [...html.matchAll(/<a rel="nofollow" class="result-link" href="(.*?)">(.*?)<\/a>/gi)];
   const items = [];
@@ -180,12 +205,19 @@ function buildPlatformTitle(platform) {
 function buildMediaMarkup(item) {
   const videoId = getYouTubeVideoId(item.url);
   const safeHost = (item.host || 'web').toString().toUpperCase();
+  const thumbnailUrl = getThumbnailUrl(item);
 
   if (videoId) {
     return `
       <div class="video-window">
         <iframe src="https://www.youtube.com/embed/${videoId}?rel=0" title="${escapeHtml(item.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
+    `;
+  }
+
+  if (thumbnailUrl) {
+    return `
+      <img class="entry-thumb" src="${escapeHtml(thumbnailUrl)}" alt="${escapeHtml(item.title)}" />
     `;
   }
 
@@ -211,13 +243,14 @@ function buildMediaMarkup(item) {
 function buildEntryMarkup(item) {
   const platformTitle = buildPlatformTitle(item.platform);
   const dateStamp = new Date().toISOString().slice(0, 10);
+  const mediaMarkup = buildMediaMarkup(item);
 
   return `
     <article class="entry">
       <h3>${escapeHtml(item.title)}</h3>
       <div class="meta">${dateStamp} <span class="tag">${buildPlatformLabel(item.platform)}</span></div>
       <p>${escapeHtml(item.summary || 'Recent public reference from the your memory archive across social and web platforms.')}</p>
-      ${buildMediaMarkup(item)}
+      ${mediaMarkup}
       <div class="external-actions">
         <a class="external-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">Open in ${platformTitle}</a>
       </div>

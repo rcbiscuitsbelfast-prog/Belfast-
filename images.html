@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-background">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="title" content="IMAGES // BELFAST IS BROKEN" />
+  <meta name="description" content="Free-to-use Belfast and urban archive imagery, altered and distorted to match the city’s unstable record." />
+  <meta name="keywords" content="Belfast images, free city photos, Belfast mural images, glitchy urban photography, distorted city archive, gallery" />
+  <meta property="og:title" content="IMAGES // BELFAST IS BROKEN" />
+  <meta property="og:description" content="A gallery of altered Belfast and urban archive stills — city memory, rewritten." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80" />
+  <title>IMAGES // BELFAST IS BROKEN</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="static-overlay" aria-hidden="true"></div>
+
+  <div class="marquee" aria-hidden="true">
+    <span>*** ARCHIVE GLITCHES *** these are real city images, then the record rewrites them *** ARCHIVE GLITCHES ***</span>
+  </div>
+
+  <main class="wrap">
+    <header class="masthead">
+      <h1 class="glitch" data-text="ARCHIVE IMAGES">ARCHIVE IMAGES</h1>
+      <p class="subhead jitter">free-to-use street and mural references, treated like evidence</p>
+      <nav class="tabs" aria-label="Primary">
+        <a href="index.html">HOME</a>
+        <a href="anomalies.html">BELFAST ANOMALIES</a>
+        <a href="worldwide.html">WORLDWIDE</a>
+        <a href="blog.html">BLOG</a>
+        <a href="contact.html">CONTACT / TIPS</a>
+      </nav>
+    </header>
+
+    <p class="timestamp">IMAGE ARCHIVE &gt; <b><span data-clock>--:--:--</span></b> &nbsp;|&nbsp; altered / mirrored / re-captured</p>
+
+    <p class="note">These are free-use stock references from public image sources. They are here as visual references, not as definitive records.</p>
+
+    <section class="image-gallery" aria-live="polite"></section>
+
+    <hr class="rule" />
+
+    <footer class="site">
+      <p class="tagline">"If Belfast changed for you too, keep watching."</p>
+      <p class="email-link">
+        <a href="mailto:belfastisbroken@protonmail.com">belfastisbroken@protonmail.com</a>
+      </p>
+      <p class="images-link">
+        <a href="images.html">Images</a>
+      </p>
+    </footer>
+  </main>
+
+  <img class="corner-static" src="assets/images/static-noise.png" alt="" aria-hidden="true" />
+  <script src="assets/js/gallery-data.js"></script>
+  <script>
+    (function () {
+      function shuffle(items) {
+        var copy = items.slice();
+        for (var i = copy.length - 1; i > 0; i -= 1) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = copy[i];
+          copy[i] = copy[j];
+          copy[j] = temp;
+        }
+        return copy;
+      }
+
+      var gallery = document.querySelector('.image-gallery');
+      if (!gallery || !window.muralImages || !window.landmarkImages) return;
+
+      var pool = shuffle([
+        ].concat(
+          window.muralImages.map(function (file) {
+            return { src: 'assets/images/flickr-murals/' + file, kind: 'MURAL' };
+          }),
+          window.landmarkImages.map(function (file) {
+            return { src: 'assets/images/flickr-landmarks/' + file, kind: 'LANDMARK' };
+          })
+        )).slice(0, 100);
+
+      pool.forEach(function (item, index) {
+        var article = document.createElement('article');
+        var classes = ['image-card'];
+        if (Math.random() > 0.5) classes.push('flipped');
+        if (Math.random() > 0.35) classes.push('distorted');
+        if (Math.random() > 0.8) classes.push('ghost');
+        article.className = classes.join(' ');
+
+        var rotate = ((Math.random() * 12) - 6).toFixed(2) + 'deg';
+        var shiftX = ((Math.random() * 18) - 9).toFixed(2) + 'px';
+        var shiftY = ((Math.random() * 12) - 6).toFixed(2) + 'px';
+        var scale = (0.92 + (Math.random() * 0.18)).toFixed(3);
+        article.style.setProperty('--card-rotate', rotate);
+        article.style.setProperty('--card-shift-x', shiftX);
+        article.style.setProperty('--card-shift-y', shiftY);
+        article.style.setProperty('--card-scale', scale);
+
+        article.innerHTML = '<img src="' + item.src + '" alt="' + item.kind + ' Belfast archive image ' + (index + 1) + '" />' +
+          '<div class="image-meta">' + item.kind + ' // ' + (index + 1).toString().padStart(2, '0') + '</div>';
+
+        gallery.appendChild(article);
+      });
+    })();
+  </script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
