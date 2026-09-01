@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-background">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <title>CONTACT / TIPS // BELFAST IS BROKEN</title>
+  <meta name="description" content="If Belfast changed for you too, tell me. Send a tip to the anonymous investigator." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="static-overlay" aria-hidden="true"></div>
+
+  <div class="marquee" aria-hidden="true">
+    <span>*** I READ EVERYTHING *** i cannot always reply *** if your message vanishes, send it again *** I READ EVERYTHING ***</span>
+  </div>
+
+  <main class="wrap">
+    <header class="masthead">
+      <h1 class="glitch" data-text="CONTACT / TIPS">CONTACT / TIPS</h1>
+      <p class="subhead jitter">one channel &middot; no accounts &middot; no names required</p>
+      <nav class="tabs" aria-label="Primary">
+        <a href="index.html">HOME</a>
+        <a href="anomalies.html">BELFAST ANOMALIES</a>
+        <a href="worldwide.html">WORLDWIDE</a>
+        <a href="blog.html">BLOG</a>
+        <a href="contact.html" class="active">CONTACT / TIPS</a>
+      </nav>
+    </header>
+
+    <p class="timestamp">CHANNEL OPEN &gt; <b><span data-clock>--:--:--</span></b></p>
+
+    <div class="contact-box">
+      <img class="glyph-icon" src="assets/images/glyph.png" alt="Small angular glyph icon" />
+      <p class="lead">"If Belfast changed for you too, tell me."</p>
+
+      <!-- mailto form: works with no backend on GitHub Pages -->
+      <form class="contact-form" action="mailto:tips@belfastisbroken.example" method="post" enctype="text/plain">
+        <label for="alias">alias (optional)</label>
+        <input type="text" id="alias" name="alias" placeholder="what should I call you?" maxlength="40" />
+
+        <label for="where">where / when did it happen?</label>
+        <input type="text" id="where" name="where" placeholder="Belfast, ██████, approx. time" maxlength="120" />
+
+        <label for="msg">what did you notice?</label>
+        <textarea id="msg" name="message" rows="6" placeholder="describe it exactly as you remember it. before the memory slips." required></textarea>
+
+        <button class="btn" type="submit">SEND TIP</button>
+      </form>
+
+      <p class="note" style="margin-top:20px;text-align:left;">
+        Prefer email? Write directly to
+        <a href="mailto:tips@belfastisbroken.example?subject=Belfast%20changed%20for%20me%20too">tips@belfastisbroken.example</a>.
+        Send photos, video, anything. Attachments sometimes fail to arrive — if that happens, it happens for a reason.
+      </p>
+
+      <p class="smallprint" style="color:#444;margin-top:10px;">
+        this is a static page — the form opens your own mail client. swap in a form endpoint (Formspree / Netlify / your own) as noted in README.md.
+      </p>
+    </div>
+
+    <footer class="site">
+      <p class="tagline">"If Belfast changed for you too, keep watching."</p>
+      <img class="construction" src="assets/images/under-construction.png" alt="Animated under construction banner" />
+      <p class="smallprint">belfastisbroken.neocities // do not send anything you are not willing to lose</p>
+    </footer>
+  </main>
+
+  <img class="corner-static" src="assets/images/static-noise.png" alt="" aria-hidden="true" />
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "belfast-is-broken",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An early-2000s conspiracy website documenting anomalies in Belfast. Pure HTML/CSS/JS, deployable to GitHub Pages.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  }
+}
