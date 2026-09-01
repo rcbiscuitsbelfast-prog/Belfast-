@@ -3,10 +3,12 @@ name: Deploy static site to Pages
 on:
   push:
     branches: ["main"]
+  schedule:
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -23,6 +25,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate generated feed
+        run: npm run test:worldwide
+
+      - name: Refresh generated content
+        run: npm run update:worldwide
+
+      - name: Commit generated updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add worldwide.html
+          if git diff --cached --quiet; then
+            echo "No generated content changes to commit."
+          else
+            git commit -m "Refresh generated site content"
+            git push origin HEAD:${GITHUB_REF_NAME:-main}
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
