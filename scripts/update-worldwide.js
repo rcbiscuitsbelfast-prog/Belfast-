@@ -318,7 +318,7 @@ function injectEntriesIntoPage(feedHtml) {
     throw new Error('The worldwide page is missing the AUTO_WORLDWIDE_FEED marker.');
   }
 
-  const updated = source.replace(marker, feedHtml);
+  const updated = source.replace(marker, `${marker}\n${feedHtml}`);
   fs.writeFileSync(PAGE_PATH, updated, 'utf8');
 }
 

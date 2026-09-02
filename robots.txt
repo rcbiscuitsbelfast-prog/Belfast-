@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rcbiscuitsbelfast-prog.github.io/Belfast-/sitemap.xml

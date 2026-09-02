@@ -32,7 +32,7 @@ Designed to be dropped straight onto **GitHub Pages**.
 ├── assets/
 │   ├── css/style.css        # the whole theme + glitch animations
 │   ├── js/main.js           # live clock, glitch flicker, visitor counter
-│   ├── js/comments.js       # client-side comments (localStorage)
+│   ├── js/comments.js       # legacy local comments script (not used by the blog)
 │   ├── images/              # low-res / pixelated art + static overlay
 │   └── videos/              # drop your .mp4 clips here (see README.txt)
 ├── posts/                   # markdown source for blog posts
@@ -122,18 +122,11 @@ Drop an `.mp4` into `/assets/videos/` and replace a placeholder with:
 
 ## Comments
 
-GitHub Pages is fully static, so comments are stored in each visitor's own
-browser via `localStorage` (see `assets/js/comments.js`). Each post shows a few
-seeded comments the first time, then anything the visitor posts.
-
-**To make comments public/shared** (visible to everyone), swap in a hosted
-comment service — no server code needed:
-
-- [Utterances](https://utteranc.es) — comments backed by GitHub Issues.
-- [Giscus](https://giscus.app) — comments backed by GitHub Discussions.
-- [Disqus](https://disqus.com) — classic embedded comments.
-
-Drop that service's embed `<script>` in place of the `.comments` block.
+The four blog posts use [Utterances](https://utteranc.es), so comments are
+shared publicly through GitHub Issues rather than stored only in one visitor's
+browser. Before publishing, install and authorise the Utterances GitHub App for
+`rcbiscuitsbelfast-prog/Belfast-`, and enable Issues in the repository settings.
+Each post has its own issue thread selected by its unique `issue-term`.
 
 ## Contact form
 

@@ -55,7 +55,7 @@
   // The archive is static. The count is local to the browser. That means nobody can prove it is wrong.
   var vc = document.querySelector("[data-visitors]");
   if (vc) {
-    var base = 000000;
+    var base = 0;
     try {
       base = parseInt(localStorage.getItem("bib_visits") || "13707", 10);
       base += 1;
